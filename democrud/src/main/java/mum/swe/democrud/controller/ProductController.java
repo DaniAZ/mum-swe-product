@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,51 +15,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import mum.swe.democrud.model.Student;
-import mum.swe.democrud.service.StudentService;
+import mum.swe.democrud.model.Product;
+import mum.swe.democrud.service.ProductService;
 
 @Controller
-public class StudentController {
+public class ProductController {
 	
 	@Autowired
-	private StudentService studentService;
+	private ProductService productService;
 
-	@RequestMapping(value="/students", method = RequestMethod.GET)
-	public ModelAndView students(){		
-		List<Student> students = studentService.findAll();		
+	@RequestMapping(value="/products", method = RequestMethod.GET)
+	public ModelAndView products(){
+		List<Product> products = productService.findAll();
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("students", students);
-		modelAndView.setViewName("student/list");
+		modelAndView.addObject("products", products);
+		modelAndView.setViewName("product/list");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/student", method = RequestMethod.GET)
+	@RequestMapping(value="/product", method = RequestMethod.GET)
 	public String create(Model model){			
-		model.addAttribute("student", new Student());
-		return "student/edit";
+		model.addAttribute("product", new Product());
+		return "product/edit";
 	}
 	
-	@RequestMapping(value = "/student", method = RequestMethod.POST)
-	public String edit(@Valid @ModelAttribute("student") Student student, 
+	@RequestMapping(value = "/product", method = RequestMethod.POST)
+	public String edit(@Valid @ModelAttribute("product") Product product,
 			BindingResult result, Model model)  {
 
 		if (result.hasErrors()) {
 			model.addAttribute("errors", result.getAllErrors());
-			return "student/edit";
+			return "product/edit";
 		}
-		student = studentService.save(student);
-		return "redirect:/students";
+		product = productService.save(product);
+		return "redirect:/products";
 	}	
 	
-	@RequestMapping(value="/student/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/product/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable Long id, Model model){	
-		model.addAttribute("student", studentService.findOne(id));
-		return "student/edit";
+		model.addAttribute("product", productService.findOne(id));
+		return "product/edit";
 	}
 	
-	@RequestMapping(value="/student/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/product/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model){		
-		studentService.delete(id);
-		return "redirect:/students";
+		productService.delete(id);
+		return "redirect:/products";
 	}	
 }

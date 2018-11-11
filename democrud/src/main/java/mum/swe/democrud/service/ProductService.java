@@ -2,11 +2,11 @@ package mum.swe.democrud.service;
 
 import java.util.List;
 
-import mum.swe.democrud.model.Student;
+import mum.swe.democrud.model.Product;
 
-public interface StudentService {
-	 List<Student> findAll();
-	 Student save(Student student);
-	 Student findOne(Long id);
+public interface ProductService {
+	 List<Product> findAll();
+	 Product save(Product product);
+	 Product findOne(Long id);
 	 void delete(Long id);
 }

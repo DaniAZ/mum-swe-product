@@ -6,11 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@ComponentScan("mum.swe.democrud")
 public class DemocrudApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DemocrudApplication.class, args);
 	}
 }
